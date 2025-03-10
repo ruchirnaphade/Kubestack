@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  labels:
+    app: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  #  Below is actual config for POD --> Blueprint for POD
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongodb
+        image: ruchirnaphade/kubestack-backend:latest
+        ports:
+        - containerPort: 5200
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            SecretKeyRef:
+              name: mongo-secret
+              key: mongo-user
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            SecretKeyRef:
+              name: mongo-secret
+              key: mongo-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+spec:
+  selector:
+    app.kubernetes.io/name: mongo
+  ports:
+  - protocol: TCP
+    port: 5200
+    targetPort: 5200
