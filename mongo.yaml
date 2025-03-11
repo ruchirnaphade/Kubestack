@@ -31,6 +31,8 @@ spec:
             SecretKeyRef:
               name: mongo-secret
               key: mongo-password
+        - name: MONGO_URI
+          value: "mongodb+srv://$(mongo-user):$(mongo-password)@kubestack-cluster.yauvp.mongodb.net/?retryWrites=true&w=majority&appName=kubestack-cluster"
 ---
 apiVersion: v1
 kind: Service

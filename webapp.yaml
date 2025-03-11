@@ -20,22 +20,6 @@ spec:
         image: ruchirnaphade/kubestack-frontend:latest
         ports:
         - containerPort: 4200
-        env:
-        - name: USER_NAME
-          valueFrom:
-            SecretKeyRef:
-              name: mongo-secret
-              key: mongo-user
-        - name: USER_PWD
-          valueFrom:
-            SecretKeyRef:
-              name: mongo-secret
-              key: mongo-password
-        - name: DB_URL
-          valueFrom:
-            configMapKeyRef:
-              name: mongo-config
-              key: mongo-url
 ---
 apiVersion: v1
 kind: Service
