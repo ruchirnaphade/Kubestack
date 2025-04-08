@@ -1,0 +1,17 @@
+name: Kubestack workflow
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  frontend:
+    name: Build and containerize FE
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v4
+    - name: Install dependencies
+      run: npm ci
+    - name: Build FE
+      run: npm run build
