@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: backend
+        working-directory: backend/src
     steps:
     - name: Checkout branch
       uses: actions/checkout@v4
