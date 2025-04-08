@@ -18,3 +18,15 @@ jobs:
       run: npm install
     - name: Build FE
       run: npm run build
+
+  backend:
+    name: Build and containerize BE
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+    - name: Checkout branch
+      uses: actions/checkout@v4
+    - name: Install dependencies
+      run: npm install
