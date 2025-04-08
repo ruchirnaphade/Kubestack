@@ -12,6 +12,6 @@ jobs:
     - name: Checkout branch
       uses: actions/checkout@v4
     - name: Install dependencies
-      run: npm run install
+      run: npm install
     - name: Build FE
       run: npm run build
