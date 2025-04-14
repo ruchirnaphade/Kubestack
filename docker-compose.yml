@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  kubestack-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    environment:
+      PORT: 4200
+      PROXY_API: http://192.168.2.39:5200/
+
+  kubestack-backend:
+    build:
+      context: ./backend
+      dockerfile: src/Dockerfile  # ✅ Reference Dockerfile inside src/
+    ports:
+      - "5200:5200"
+
