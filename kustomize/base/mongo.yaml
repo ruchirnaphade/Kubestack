@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo-deployment
+  name: mongo-deployment  # Changed this name from webapp-deployment to mongo-deployment
   labels:
     app: mongo
 spec:
@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       app: mongo
-  #  Below is actual config for POD --> Blueprint for POD
   template:
     metadata:
       labels:
@@ -24,15 +23,15 @@ spec:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:
-              name: mongo-secret
-              key: mongo-user
+              name: app-secret
+              key: MONGO_USER
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mongo-secret
-              key: mongo-password
+              name: app-secret
+              key: MONGO_PASSWORD
         - name: MONGO_URI
-          value: "mongodb+srv://$(mongo-user):$(mongo-password)@kubestack-cluster.yauvp.mongodb.net/?retryWrites=true&w=majority&appName=kubestack-cluster"
+          value: "mongodb+srv://$(MONGO_USER):$(MONGO_PASSWORD)@$(MONGO_HOST)/?retryWrites=true&w=majority&appName=kubestack-cluster"
 ---
 apiVersion: v1
 kind: Service
@@ -45,3 +44,4 @@ spec:
   - protocol: TCP
     port: 5200
     targetPort: 5200
+

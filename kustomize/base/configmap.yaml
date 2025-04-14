@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  MONGO_USER: ruchirnaphade
+  MONGO_HOST: kubestack-cluster.yauvp.mongodb.net
+  MONGO_DB: employees
+

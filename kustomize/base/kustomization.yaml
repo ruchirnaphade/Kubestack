@@ -1,0 +1,6 @@
+resources:
+  - webapp.yaml
+  - mongo.yaml
+  - configmap.yaml
+  - secret.yaml
+

@@ -22,3 +22,8 @@ jobs:
         run: |
           cd Kubestack/frontend
           docker build -t mean-frontend:latest .
+
+      - name: Deploy to Kubernetes via Kustomize
+        run: |
+          cd Kubestack/kustomize/overlays/local
+          kubectl apply -k .     
