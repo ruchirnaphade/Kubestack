@@ -1,0 +1,24 @@
+name: Build & Deploy to Local Pi K8s
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Build Backend Docker Image
+        run: |
+          cd Kubestack/backend
+          docker build -t mean-backend:latest .
+
+      - name: Build Frontend Docker Image
+        run: |
+          cd Kubestack/frontend
+          docker build -t mean-frontend:latest .
